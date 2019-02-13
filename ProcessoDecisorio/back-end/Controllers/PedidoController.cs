@@ -27,7 +27,16 @@ namespace BackEndNovo.Controllers
         [EnableCors("AllowCORS")]
         public List<Pedido> Get()
         {
-            return _pedidoContext.Pedido.Include(i => i.PedidoProduto).ToList();
+            return _pedidoContext.Pedido.Select(
+                p => new Pedido {
+                    cidade = p.cidade,
+                    estado = p.estado,
+                    cliente = p.cliente,
+                    total = p.total,
+                    data = p.data,
+                    pedidoid = p.pedidoid
+                  })
+            .OrderBy((x => x.data)).ToList();
         }
 
         // GET: api/Pedido/5

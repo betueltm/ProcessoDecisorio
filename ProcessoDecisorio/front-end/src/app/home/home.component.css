@@ -13,4 +13,8 @@ td, th {
 
 mat-card {
   margin: 8px;
+  position: relative;
+  display: block;
+  float: left;
+  width: 668px;
 }

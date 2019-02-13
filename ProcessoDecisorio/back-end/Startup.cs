@@ -12,6 +12,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.EntityFrameworkCore;
 using BackEndNovo.Context;
+using Newtonsoft.Json;
 
 namespace BackEndNovo
 {
@@ -27,18 +28,22 @@ namespace BackEndNovo
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
             services.AddCors(options => {
-            options.AddPolicy("AllowCORS",
-                builder => builder.AllowAnyOrigin()
-                                    .AllowAnyHeader()
-                                    .AllowAnyMethod());
-            });
+
+                options.AddPolicy("AllowCORS",
+                                  builder => builder.WithOrigins("http://localhost:4200","*")
+                                        .AllowAnyOrigin()
+                                        .AllowAnyHeader()
+                                        .AllowAnyMethod());
+                });
             services.AddMvc()
-                .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+                    .AddJsonOptions(options => options.SerializerSettings.DateFormatString = "dd/MM/yyyy")
+                    .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             services.AddEntityFrameworkNpgsql()
-                .AddSingleton<Contexto>()
-                .AddDbContext<Contexto>(options => options.UseNpgsql(Configuration.GetConnectionString("saddb")), ServiceLifetime.Singleton);
+                .AddTransient<Contexto>()
+                    .AddDbContext<Contexto>(options => options.UseNpgsql(Configuration.GetConnectionString("saddb")), ServiceLifetime.Transient);
 
 
         }

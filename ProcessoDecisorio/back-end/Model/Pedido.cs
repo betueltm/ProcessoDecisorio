@@ -12,13 +12,14 @@ namespace BackEndNovo.Model
     public class Pedido
     {
         public long pedidoid { get; set; }
+
         public DateTime data { get; set; }
         public double total { get; set; }
         public string cliente { get; set; }
         public string cidade { get; set; }
         public string estado { get; set; }
 
-        [JsonIgnore]
+
         [ForeignKey("pedidoid")]
         public virtual ICollection<PedidoProduto> PedidoProduto { get; set; }
     }

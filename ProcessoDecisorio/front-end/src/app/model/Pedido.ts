@@ -1,4 +1,4 @@
-import { Produto } from "./Produto";
+import { Produto } from "./produto";
 
 export class Pedido {
   pedidoid: number;

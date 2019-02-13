@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Produto } from '../Model/Produto';
+import { Produto } from '../model/produto';
 import { ProdutoService } from '../servicos/produto.service';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { FormBuilder, FormGroup, Validators, Form } from '@angular/forms';

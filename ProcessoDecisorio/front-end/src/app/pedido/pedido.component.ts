@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Produto } from '../Model/Produto';
-import { Pedido } from '../Model/Pedido';
+import { Produto } from '../model/produto';
+import { Pedido } from '../model/pedido';
 import { ProdutoService } from '../servicos/produto.service';
 import { PedidoService } from '../servicos/pedido.service';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
@@ -60,6 +60,7 @@ export class PedidoComponent implements OnInit {
     this.novo_produto.produtoid = this.produtosCadastrados.find(h => h.produtoid == this.produtoForm.value.id).produtoid;
     this.novo_produto.nome = this.produtosCadastrados.find(h => h.produtoid == this.produtoForm.value.id).nome;
     this.novo_produto.valor = this.produtosCadastrados.find(h => h.produtoid == this.produtoForm.value.id).valor;
+    this.novo_produto.categoria = this.produtosCadastrados.find(h => h.produtoid == this.produtoForm.value.id).categoria;
     this.produtosPedido.push(this.novo_produto);
     this.total += this.novo_produto.valor;
     
@@ -92,6 +93,7 @@ export class PedidoComponent implements OnInit {
   }
 
   inicializar() {
+    this.total = 0;
     this.produtosPedido = [];
     this.inicializarProdutoPedido();
     this.inicializarCamposPedido();
